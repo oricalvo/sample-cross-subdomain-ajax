@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        document.domain = "mysite.com";
+    </script>
+</head>
+<body>
+    <h1>Site 1</h1>
+
+    <iframe style="display: none;" src="http://auth.mysite.com:8080"></iframe>
+
+    <button>Authenticate</button>
+
+    <script>
+        let iframe;
+
+        window.addEventListener("load", function() {
+            console.log("load");
+
+            iframe = document.querySelector("iframe");
+            if(!iframe) {
+                throw new Error("iframe was not found");
+            }
+
+            window.authServer = iframe.contentWindow.authServer;
+        });
+
+        document.querySelector("button").addEventListener("click", async function() {
+            const res = await authServer.authenticate();
+            const user = await res.json();
+            console.log(user);
+        });
+    </script>
+</body>
+</html>

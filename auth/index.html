@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        document.domain = "mysite.com";
+    </script>
+</head>
+<body>
+    <h1>Site 2</h1>
+
+    <script>
+        window.authServer = {
+            authenticate: function() {
+                return fetch("/auth");
+            }
+        };
+    </script>
+</body>
+</html>
